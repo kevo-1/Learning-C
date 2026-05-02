@@ -12,6 +12,7 @@
     %c  -> char
     %s  -> string/char*
     %zu -> size_t
+    %p  -> pointer
 
 ---
 
@@ -59,3 +60,41 @@
 
 > [!Tip]
 > A naming convention while working with typedef is **struct_name_t**
+
+---
+
+### Pointers:
+
+```c
+struct *Struct;
+Struct->x = 3;
+// is just the same as
+(*Struct).x;
+
+
+int arr[3] = {1, 2, 3};
+int val = arr[2];
+// is the same as
+int val = *(arr + 2);
+
+
+// to reference a struct in the struct attributes you should forward declare it
+typedef struct Node node_t;
+
+typedef struct Node {
+    int value;
+    node_t *next;
+} node_t;
+
+// and it is actually preferred to be done in the following format
+typedef struct Node node_t;
+
+struct Node {
+    int value;
+    node_t *next;
+};
+```
+
+> accessing the attributes of a pointer is done through the `S->attribute` operator, and has a work around using `(*S).attribute` too.
+
+> Arrays decay into `int*` when passed as a function param, which makes it lose the `sizeof` accurate representation.
