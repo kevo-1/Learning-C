@@ -158,7 +158,7 @@ uint32_t  → │               rgba (32-bit)               │
 
 ---
 
-# Stack & Heap:
+### Stack & Heap:
 
 #### Stack:
 
@@ -192,4 +192,47 @@ int factorial(int n , int curr = 1) {
     if(n == 0) return curr;
     return factorial(n-1, curr*n);
 }
+```
+
+> Use **malloc** for allocating memory in the heap and after getting done with that memory use **free** so that you don't run out of memory.
+
+> **Big Endian & Little Endian**, when storing addresses there is 2 different philosophies to doing so, **Big Endian** stores the `most` significant byte at the start while **Little Endian** stores the `least` significant byte first.
+> Note: **Big Endian** is mostly used for `networking(TCP/IP)`, while **Little Endian** is mostly used in `intel x86/AMD CPUs, and modern CPUs` too.
+
+---
+
+### Advanced pointers:
+
+##### Example to understand pointer to pointer:
+
+```c
+int v1 = 1; int v2 = 2; int cp = 0;
+
+int *ptr = &v1; int **ptr_ptr = &ptr;
+
+cp = **ptr_ptr; // cp = 1
+
+*ptr_ptr = &v2;
+cp = **ptr_ptr //cp = 2
+```
+
+##### Memory representation
+
+```
+v1          0x04    1
+v2          0x08    2
+cp          0x12    2
+
+ptr         0x20    0x08
+ptr_ptr     0x028   0x20
+```
+
+#### Void Pointers
+
+They are generally used to store any kind of value in memory without worrying much about the data type, and to use the value in that memory place you would first need to cast it into the data type required.
+
+```C
+int num = 1;
+void *ptr = &num;
+printf("%d", *(int*)ptr); // 1
 ```
