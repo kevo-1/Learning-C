@@ -236,3 +236,19 @@ int num = 1;
 void *ptr = &num;
 printf("%d", *(int*)ptr); // 1
 ```
+
+---
+
+### Stack Data Structure:
+
+```c
+typedef struct Stack {
+    size_t count;       // number of elements
+    size_t capacity;    // max number of elements before resizing.
+    void **data;        // void ** so that we can store any data type in an array
+} stack_t
+```
+
+> we can use `realloc` to reallocate a chunk of memory with a new size, with a worst complexity of $O(N)$.
+
+> it is very easy to shoot yourself in the foot while working with void pointers, as you can push an int then an int pointer in the same stack, so take care of this point.
