@@ -252,3 +252,26 @@ typedef struct Stack {
 > we can use `realloc` to reallocate a chunk of memory with a new size, with a worst complexity of $O(N)$.
 
 > it is very easy to shoot yourself in the foot while working with void pointers, as you can push an int then an int pointer in the same stack, so take care of this point.
+
+---
+
+### Objects in C:
+
+[header file](Sneklang/snekobject.h)
+[C file](Sneklang/snekobject.c)
+
+> `calloc(size_t num, size_t size)` is used for continous allocation and initializes all elements with `0`
+
+---
+
+### Garabage collection:
+
+#### RefCounting (reference counting):
+
+It is mainly adding a field to count how many times the variable is referenced, incrementing whenver a new object references it, and decrements whenver the object is freed.
+
+> It can't track cycles, and it is expensive.
+
+#### Mark & Sweep:
+
+It handles the reference marking by checking
