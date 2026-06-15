@@ -270,8 +270,15 @@ typedef struct Stack {
 
 It is mainly adding a field to count how many times the variable is referenced, incrementing whenver a new object references it, and decrements whenver the object is freed.
 
-> It can't track cycles, and it is expensive.
+> It can't track cycles, and it is expensive. (2 objects referencing each other)
 
 #### Mark & Sweep:
 
 It handles the reference marking by checking
+
+We first DFS traversing starting at the Root, and mark all reachable objects `true`, then we Sweep by clearing any non-marked object from the *Heap*.
+
+> Main problem is that the GC halts the program until it is done.
+> Also another problem is running this algorithm multiple times would result in fragmentation, which would later on need compaction. 
+
+> In this course, *Mark&Sweep* was demonstrated using a VM type.
